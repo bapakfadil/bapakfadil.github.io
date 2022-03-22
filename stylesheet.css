@@ -1,0 +1,301 @@
+/* :root is where i put colors*/
+        :root {
+            --putih: #F5F2E7;
+            --biru-tua: #2666CF;
+            --biru-gelap: #395B64;
+            --gelap: #2C3333;
+        }
+
+        /* 
+           let's zeroed margin and padding first 
+        */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /*
+            i followed everyone in this.
+            css-tricks told me : https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+        */
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
+        }
+
+        html {
+            box-sizing: border-box;
+            /*
+                i've read source code from Mimic, and i got new knowledge there
+                the default document font size is 16px.
+                16px = 1 rem = 100% font size, i'm gonna change it to 10px
+                with this calculation (100% / 16px) * 10 = 62.5%
+            */
+            font-size: 62.5%;
+            scroll-behavior: smooth;
+        }
+
+        /*
+            media query to set font size and every thing in the web to fit any screen size
+            once again i'll use Mimic theory, and now we gonna calculate breakpoints
+        */
+
+        /* 1200px / 16px = 75*/
+        @media (max-width: 75em) {
+            html {
+                font-size: 60%;
+            }
+        }
+
+        /* 980px / 16px = 61.25em */
+        @media (max-width: 61.25em) {
+            html {
+                font-size: 58%;
+            }
+        }
+
+        /* 460px / 16px = 28.75em */
+        @media (max-width: 28.75em) {
+            html {
+                font-size: 55%;
+            }
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1;
+            color: var(--putih);
+        }
+        h1,h2 {
+            font-weight: 700;
+            text-align: center;
+        }
+        h1 {
+            font-size: 6rem;
+        }
+        h2 {
+            font-size: 4.2rem;
+        }
+        ul {
+            list-style: none;
+        }
+        a {
+            text-decoration: none;
+            color: var(--putih);
+        }
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        /* Navigation Bar */
+        .nav {
+            display: flex;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            right: 1rem;
+            border: 4px solid var(--biru-gelap);
+            border-radius: 10px;
+            background: var(--gelap);
+            z-index: 10;
+            /*box-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);*/
+        }
+        .nav-list {
+            justify-content: flex-end;
+            width: 50%;
+            float: right;
+            display: flex;
+            margin-left: 0 1rem;
+        }
+        .nav-list a {
+            display: block;
+            font-size: 2.2rem;
+            padding: 14px;
+        }
+        .nav-list a:hover {
+            margin: 4px;
+            padding: 10px;
+            border-radius: 4px;
+            background: var(--biru-gelap);
+        }
+        .search {
+            margin: 7px 0 7px 20px;
+            width: 50%;
+            float: left;
+            display: flex;
+        }
+        .searchTerm {
+            width: 40%;
+            border: 3px solid var(--biru-gelap);
+            border-right: none;
+            height: 36px;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+            color: #9DBFAF;
+        }
+        .searchTerm:focus{
+            color: var(--biru-gelap);
+        }
+        .searchButton {
+            width: 40px;
+            height: 36px;
+            border: 1px solid var(--biru-gelap);
+            background: var(--biru-gelap);
+            text-align: center;
+            color: var(--putih);
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .welcome-section {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--biru-gelap);
+        }
+        .welcome-section .greetings {
+            flex-direction: column;
+            text-align: left;
+        }
+        .welcome-image {
+            margin-left: 5rem;
+            width: 200px;
+        }
+
+        .projects-section {
+            text-align: center;
+            padding: 10rem 2rem;
+            background: var(--gelap);
+        }
+        .projects-header {
+            max-width: 360px;
+            margin: 0 auto 6rem auto;
+            border-bottom: 4px solid var(--putih);
+        }
+        @media (max-width: 28.75em) {
+            .projects-header {
+                font-size: 4rem;
+            }
+        }
+
+        /* Mimic said it'll be magic */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-gap: 4rem;
+            width: 80%;
+            max-width: 1280px;
+            margin: 0 auto;
+            margin-bottom: 6rem;
+        }
+        /* and yes it is magic */
+
+        @media (max-width: 30.625em) {
+            .projects-section {
+                padding: 6rem 1rem;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .project {
+            color: var(--gelap);
+            background: var(--putih);
+            border-radius: 6px;
+        }
+        .code {
+            font-size: 2rem;
+            color: var(--gelap);
+            transition: color 0.3s ease-out;
+        }
+        .project:hover {
+            box-shadow: 0 8px 10px var(--biru-gelap);;
+        }
+        .project-image {
+            height: calc(100% - 6.8rem);
+            width: 100%;
+            object-fit: cover;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+        .project-title {
+            font-size: 2rem;
+            padding: 2rem 0.5rem;
+        }
+
+        .contact-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            height: 80vh;
+            padding: 0 2rem;
+            background: var(--biru-gelap);
+        }
+        .contact-image {
+            margin-right: 10rem;
+            float: left;
+            width: 80px;
+        }
+        .contact-header {
+            float: right;
+        }
+        .contact-header > h2 {
+            font-size: 4rem;
+        }
+        @media (max-width: 28.75em) {
+            .contact-header > h2 {
+                font-size: 2rem;
+            }
+        }
+        .contact-header > p {
+            font-style: italic;
+        }
+        .contact-list {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            max-width: 980px;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        .contact-details {
+            font-size: 2.4rem;
+            text-shadow: 2px 2px 1px #1f1f1f;
+            transition: transform 0.3s ease-out;
+        }
+        .contact-details:hover {
+            transform: translateY(8px);
+        }
+
+        footer {
+            font-weight: 300;
+            display: flex;
+            justify-content: space-evenly;
+            padding: 2rem;
+            background: var(--gelap);
+            border-top: 4px solid var(--putih);
+        }
+        footer > p {
+            margin: 2rem;
+        }
+        footer i {
+            vertical-align: middle;
+        }
+        @media (max-width: 28.75em) {
+            footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }

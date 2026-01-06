@@ -1,152 +1,741 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/d38bd4d27d.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="stylesheet.css">
-    <title>My Porto</title>
-</head>
-<body>
-    <nav id="navbar" class="nav">
-        <div class="search">
-            <input type="text" class="searchTerm" placeholder=" This is just an accessories">
-            <button type="submit" class="searchButton">
-              <i class="fa fa-search"></i>
-           </button>
-         </div>
-        <ul class="nav-list">
-            <li>
-              <a href="#welcome-section">Home</a>
-            </li>
-            <li>
-              <a href="#projects">Projects</a>
-            </li>
-            <li>
-              <a href="#contact">Contact Me</a>
-            </li>
-        </ul>
-    </nav>
-    <section id="welcome-section" class="welcome-section">
-        <div class="greetings" style="text-align: left;">
-            <h1>Hi! it's Fadil</h1>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abi fadila</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* --- CSS VARIABLES (Shadcn-like Theme) --- */
+      :root {
+        /* Light Mode */
+        --background: 0 0% 100%;
+        --foreground: 222.2 84% 4.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 222.2 84% 4.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 222.2 84% 4.9%;
+        --primary: 221.2 83.2% 53.3%; /* Biru Cerah */
+        --primary-foreground: 210 40% 98%;
+        --secondary: 210 40% 96.1%;
+        --secondary-foreground: 222.2 47.4% 11.2%;
+        --muted: 210 40% 96.1%;
+        --muted-foreground: 215.4 16.3% 46.9%;
+        --accent: 210 40% 96.1%;
+        --accent-foreground: 222.2 47.4% 11.2%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 210 40% 98%;
+        --border: 214.3 31.8% 91.4%;
+        --input: 214.3 31.8% 91.4%;
+        --ring: 221.2 83.2% 53.3%;
+        --radius: 0.5rem;
+      }
+
+      .dark {
+        /* Dark Mode */
+        --background: 222.2 84% 4.9%;
+        --foreground: 210 40% 98%;
+        --card: 222.2 84% 4.9%;
+        --card-foreground: 210 40% 98%;
+        --popover: 222.2 84% 4.9%;
+        --popover-foreground: 210 40% 98%;
+        --primary: 217.2 91.2% 59.8%;
+        --primary-foreground: 222.2 47.4% 11.2%;
+        --secondary: 217.2 32.6% 17.5%;
+        --secondary-foreground: 210 40% 98%;
+        --muted: 217.2 32.6% 17.5%;
+        --muted-foreground: 215 20.2% 65.1%;
+        --accent: 217.2 32.6% 17.5%;
+        --accent-foreground: 210 40% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 210 40% 98%;
+        --border: 217.2 32.6% 17.5%;
+        --input: 217.2 32.6% 17.5%;
+        --ring: 212.7 26.8% 83.9%;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+        line-height: 1.6;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      /* --- UTILITY CLASSES --- */
+      .container {
+        max-width: 1024px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius);
+        font-weight: 500;
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        border: 1px solid transparent;
+      }
+
+      .btn-primary {
+        background-color: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+      }
+
+      .btn-primary:hover {
+        opacity: 0.9;
+      }
+
+      .btn-outline {
+        border: 1px solid hsl(var(--input));
+        background-color: transparent;
+        color: hsl(var(--foreground));
+      }
+
+      .btn-outline:hover {
+        background-color: hsl(var(--accent));
+        color: hsl(var(--accent-foreground));
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 9999px;
+        border: 1px solid transparent;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        transition: colors 0.2s;
+      }
+
+      .badge-secondary {
+        background-color: hsl(var(--secondary));
+        color: hsl(var(--secondary-foreground));
+        border-color: hsl(var(--border));
+      }
+
+      .card {
+        border-radius: var(--radius);
+        border: 1px solid hsl(var(--border));
+        background-color: hsl(var(--card));
+        color: hsl(var(--card-foreground));
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        padding: 1.5rem;
+      }
+
+      /* --- NAVBAR --- */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        width: 100%;
+        border-bottom: 1px solid hsl(var(--border));
+        background-color: hsla(var(--background), 0.8);
+        backdrop-filter: blur(8px);
+      }
+
+      .nav-content {
+        display: flex;
+        height: 3.5rem;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        font-weight: 700;
+        font-size: 1.125rem;
+        color: hsl(var(--foreground));
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .nav-links a {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: hsl(var(--muted-foreground));
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .nav-links a:hover {
+        color: hsl(var(--foreground));
+      }
+
+      /* --- HERO --- */
+      .hero {
+        padding: 5rem 0;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+      }
+
+      .hero p {
+        font-size: 1.125rem;
+        color: hsl(var(--muted-foreground));
+        max-width: 600px;
+        margin: 0 auto 2rem;
+      }
+
+      /* --- INTRO (UVP) --- */
+      .uvp {
+        text-align: center;
+        margin-bottom: 4rem;
+        padding: 2rem;
+        background-color: hsl(var(--secondary));
+        border-radius: var(--radius);
+        border: 1px solid hsl(var(--border));
+      }
+
+      .uvp p {
+        font-size: 1rem;
+        color: hsl(var(--secondary-foreground));
+        font-weight: 500;
+      }
+
+      /* --- SPLIT SECTION (Skills & Exp) --- */
+      .split-section {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 5rem;
+      }
+
+      @media (min-width: 768px) {
+        .split-section {
+          grid-template-columns: 1fr 1px 1fr; /* Kiri - Garis - Kanan */
+          gap: 0;
+        }
+        .separator {
+          width: 1px;
+          background-color: hsl(var(--border));
+          height: 100%;
+        }
+        .split-left {
+          padding-right: 2rem;
+        }
+        .split-right {
+          padding-left: 2rem;
+        }
+      }
+
+      .section-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: hsl(var(--foreground));
+      }
+
+      /* Skills Grid */
+      .skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      /* Timeline */
+      .timeline-item {
+        position: relative;
+        padding-left: 1.5rem;
+        padding-bottom: 2rem;
+        border-left: 2px solid hsl(var(--border));
+      }
+
+      .timeline-item:last-child {
+        border-left: 2px solid transparent;
+      }
+
+      .timeline-dot {
+        position: absolute;
+        left: -0.35rem; /* Adjust based on border width */
+        top: 0;
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+        background-color: hsl(var(--primary));
+        border: 2px solid hsl(var(--background));
+      }
+
+      .timeline-role {
+        font-weight: 600;
+        font-size: 1rem;
+      }
+
+      .timeline-company {
+        font-size: 0.875rem;
+        color: hsl(var(--muted-foreground));
+        margin-bottom: 0.25rem;
+      }
+
+      .timeline-desc {
+        font-size: 0.875rem;
+        color: hsl(var(--foreground));
+      }
+
+      /* --- PROJECTS CAROUSEL --- */
+      .carousel-container {
+        margin-bottom: 5rem;
+        position: relative;
+      }
+
+      .carousel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .carousel-track {
+        display: flex;
+        gap: 1.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 1rem; /* Space for scrollbar */
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+
+      .carousel-track::-webkit-scrollbar {
+        display: none;
+      }
+
+      .project-card {
+        min-width: 300px;
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .project-image {
+        width: 100%;
+        height: 160px;
+        background-color: hsl(var(--muted));
+        border-radius: calc(var(--radius) - 2px);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: hsl(var(--muted-foreground));
+        font-size: 2rem;
+      }
+
+      .project-title {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .project-desc {
+        font-size: 0.875rem;
+        color: hsl(var(--muted-foreground));
+        margin-bottom: 1rem;
+        flex-grow: 1;
+      }
+
+      .carousel-controls {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      /* --- CONTACT & FOOTER --- */
+      .contact {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      footer {
+        border-top: 1px solid hsl(var(--border));
+        padding: 2rem 0;
+        text-align: center;
+        font-size: 0.875rem;
+        color: hsl(var(--muted-foreground));
+      }
+
+      /* Toggle Button */
+      #theme-toggle {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: hsl(var(--foreground));
+        padding: 0.5rem;
+        border-radius: var(--radius);
+      }
+
+      #theme-toggle:hover {
+        background-color: hsl(var(--accent));
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav-content">
+        <a href="#" class="logo">Abi fadila</a>
+        <div style="display: flex; align-items: center; gap: 1.5rem">
+          <nav class="nav-links">
+            <a href="#about">About</a>
+            <a href="#projects">Work</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          <button id="theme-toggle" aria-label="Toggle Dark Mode">
+            <svg
+              id="moon-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+            <svg
+              id="sun-icon"
+              style="display: none"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2" />
+              <path d="M12 20v2" />
+              <path d="m4.93 4.93 1.41 1.41" />
+              <path d="m17.66 17.66 1.41 1.41" />
+              <path d="M2 12h2" />
+              <path d="M20 12h2" />
+              <path d="m6.34 17.66-1.41 1.41" />
+              <path d="m19.07 4.93-1.41 1.41" />
+            </svg>
+          </button>
         </div>
-        <div class="welcome-image">
-            <img 
-                src="https://i.pinimg.com/originals/84/af/a6/84afa6f3a84d92f23d919834739bd9a6.png" 
-                alt="its confusing">
-        </div>
-    </section>
-    <section id="projects" class="projects-section">
-        <h2 class="projects-header">
-            List of my Projects
-        </h2>
-        <div class="projects-grid">
-            <a 
-            href="https://codepen.io/bocahbondol/full/OJbzQyW"
+      </div>
+    </header>
+
+    <main class="container">
+      <section id="hero" class="hero">
+        <h1>Ensuring Quality,<br />Crafting Experiences.</h1>
+        <p>
+          Experienced Software QA in Finance & Media sectors, also a Freelance
+          Full-stack Web Developer.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center">
+          <a href="#projects" class="btn btn-primary">See Projects</a>
+          <a
+            href="https://github.com/bapakfadil"
             target="_blank"
-            class="project project-tile"
-            >
-                <img 
-                class="project-image"
-                src="https://static.vecteezy.com/system/resources/previews/000/657/593/original/young-people-cartoon-vector.jpg" 
-                alt="page-icon">
-                <p class="project-title">
-                    Tribut Page
-                </p>
-            </a>
-            <a 
-            href="https://codepen.io/bocahbondol/full/GRvoyVW" 
-            target="_blank"
-            class="project project-tile"
-            >
-                <img 
-                src="https://image.freepik.com/free-vector/background-with-person-holding-marker-filling-out-survey_23-2147610669.jpg" 
-                alt="page-icon"
-                class="project-image">
-                <p class="project-title">
-                    Survey Form
-                </p>
-            </a>
-            <a 
-            href="https://codepen.io/bocahbondol/full/PoOJYoP"
-            target="_blank" 
-            class="project project-tile"
-            >
-                <img 
-                src="https://contentmaximiser.com/wp-content/uploads/2015/08/sales-landing-page.jpg?x34115" 
-                alt="page-icon" 
-                class="project-image">
-                <p class="project-title">
-                    Landing Page
-                </p>
-            </a>
+            class="btn btn-outline"
+            >GitHub Profile</a
+          >
         </div>
-    </section>
-    <section id="contact" class="contact-section">
-        <div class="contact-header">
-            <h2>Contact me through <i class="fas fa-hand-point-down"></i></h2>
-        </div>
-        <div class="contact-tile">
-            <div class="contact-list">
-                <a 
-                href="https://facebook.com/freecodecamp"
-                target="_blank"
-                class="btn contact-details"
-                >
-                    <i class="fab fa-facebook-square" aria-hidden="true"></i>
-                    Facebook
-                </a>
-                <a 
-                href="https://twitter.com/abifadila"
-                target="_blank"
-                class="btn contact-details"
-                >
-                    <i class="fab fa-twitter-square" aria-hidden="true"></i>
-                    Twitter
-                </a>
-                <a 
-                href="http://instagram.com/abifadila" 
-                target="_blank"
-                class="btn contact-details"
-                >
-                    <i class="fab fa-instagram"></i>
-                    Instagram
-                </a>
-                <a
-                id="profile-link"
-                href="https://freecodecamp.com/abifadila"
-                target="_blank"
-                class="btn contact-details"
-                >
-                    <i class="fab fa-github"></i>
-                    freeCodeCamp
-                </a>
-                <a 
-                href="mailto:sipadil28@hotmail.com" 
-                class="btn contact-details"
-                >
-                    <i class="fas fa-at"></i>
-                    Send me
-                </a>  
+      </section>
+
+      <section id="about" class="uvp" style="display: none">
+        <p>
+          "As a QA transitioning to Development, I bring Software Standards
+          Quality into every line of code I write."
+        </p>
+      </section>
+
+      <section id="skills-experience" class="split-section">
+        <div class="split-left">
+          <h2 class="section-title">Tech Stack & Tools</h2>
+
+          <div style="margin-bottom: 1.5rem">
+            <p
+              style="
+                font-size: 0.875rem;
+                color: hsl(var(--muted-foreground));
+                margin-bottom: 0.5rem;
+              "
+            >
+              Development
+            </p>
+            <div class="skills-grid">
+              <span class="badge badge-secondary">PHP</span>
+              <span class="badge badge-secondary">Laravel</span>
+              <span class="badge badge-secondary">Java</span>
+              <span class="badge badge-secondary">Spring Boot</span>
+              <span class="badge badge-secondary">JavaScript</span>
+              <span class="badge badge-secondary">React</span>
+              <span class="badge badge-secondary">HTML5</span>
+              <span class="badge badge-secondary">CSS3</span>
+              <span class="badge badge-secondary">Kotlin</span>
+              <span class="badge badge-secondary">Firebase</span>
             </div>
+          </div>
+
+          <div>
+            <p
+              style="
+                font-size: 0.875rem;
+                color: hsl(var(--muted-foreground));
+                margin-bottom: 0.5rem;
+              "
+            >
+              Quality Assurance
+            </p>
+            <div class="skills-grid">
+              <span class="badge badge-secondary">Jira</span>
+              <span class="badge badge-secondary">Postman</span>
+              <span class="badge badge-secondary">Kibana</span>
+              <span class="badge badge-secondary">AS400</span>
+              <span class="badge badge-secondary">DBeaver</span>
+              <span class="badge badge-secondary">Selenium</span>
+              <span class="badge badge-secondary">Appium</span>
+              <span class="badge badge-secondary">Katalon</span>
+              <span class="badge badge-secondary">JMeter</span>
+            </div>
+          </div>
         </div>
-    </section>
+
+        <div class="separator"></div>
+
+        <div class="split-right">
+          <h2 class="section-title">Experience Timeline</h2>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <h3 class="timeline-role">Software QA</h3>
+            <div class="timeline-company">Bank Mandiri (Present)</div>
+            <p class="timeline-desc">
+              Focus on testing and ensuring quality of Kopra, Bank Mandiri's
+              Wholesale Digital Banking product.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <h3 class="timeline-role">Software QA Intern</h3>
+            <div class="timeline-company">Harian Kompas</div>
+            <p class="timeline-desc">
+              Involved in Manual and Automated Testing for Harian Kompas digital
+              software products.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <h3 class="timeline-role">Freelance Web Developer</h3>
+            <div class="timeline-company">Self-Employed</div>
+            <p class="timeline-desc">
+              Building custom web solutions using PHP Laravel, Java Spring Boot,
+              and JS React for various clients. And also working on Mobile Apps
+              using Kotlin and Firebase.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <h3 class="timeline-role">College</h3>
+            <div class="timeline-company">Study</div>
+            <p class="timeline-desc">
+              First encounter with coding through academic and personal
+              projects.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="carousel-container">
+        <div class="carousel-header">
+          <h2 class="section-title" style="margin-bottom: 0">
+            Featured Projects
+          </h2>
+          <div class="carousel-controls">
+            <button
+              class="btn btn-outline"
+              id="prevBtn"
+              style="padding: 0.5rem"
+            >
+              ←
+            </button>
+            <button
+              class="btn btn-outline"
+              id="nextBtn"
+              style="padding: 0.5rem"
+            >
+              →
+            </button>
+          </div>
+        </div>
+
+        <div class="carousel-track" id="track">
+          <div class="card project-card">
+            <div class="project-image">💼</div>
+            <h3 class="project-title">Kopra by Mandiri</h3>
+            <p class="project-desc">
+              Wholesale Digital Banking Platform for corporate clients in Bank.
+            </p>
+            <div class="skills-grid" style="margin-bottom: 1rem">
+              <span class="badge badge-secondary"
+                >Software Quality Assurance</span
+              >
+              <span class="badge badge-secondary">Manual Testing</span>
+              <span class="badge badge-secondary">Jira</span>
+            </div>
+            <a
+              href="koprabymandiri.com"
+              class="btn btn-primary"
+              style="width: 100%"
+              >View Repo</a
+            >
+          </div>
+
+          <div class="card project-card">
+            <div class="project-image">🤖</div>
+            <h3 class="project-title">Avara</h3>
+            <p class="project-desc">
+              Regular Note App with Reminder and To-do features for Android
+            </p>
+            <div class="skills-grid" style="margin-bottom: 1rem">
+              <span class="badge badge-secondary">Kotlin</span>
+              <span class="badge badge-secondary">Firebase</span>
+            </div>
+            <a
+              href="https://github.com/bapakfadil/avara"
+              class="btn btn-primary"
+              style="width: 100%"
+              >View Repo</a
+            >
+          </div>
+
+          <div class="card project-card">
+            <div class="project-image">📰</div>
+            <h3 class="project-title">Posyandu</h3>
+            <p class="project-desc">
+              Posyandu Information and Data Management System
+            </p>
+            <div class="skills-grid" style="margin-bottom: 1rem">
+              <span class="badge badge-secondary">Laravel</span>
+            </div>
+            <a
+              href="https://github.com/bapakfadil/posyandu"
+              class="btn btn-primary"
+              style="width: 100%"
+              >View Repo</a
+            >
+          </div>
+
+          <div class="card project-card">
+            <div class="project-image">🛒</div>
+            <h3 class="project-title">Company Bankruptcy Checker</h3>
+            <p class="project-desc">
+              A company bankruptcy prediction using Grover Model
+            </p>
+            <div class="skills-grid" style="margin-bottom: 1rem">
+              <span class="badge badge-secondary">Laravel</span>
+            </div>
+            <a href="#" class="btn btn-primary" style="width: 100%"
+              >View Repo</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <h2 class="section-title">Ready to Collaborate?</h2>
+        <p style="color: hsl(var(--muted-foreground)); margin-bottom: 1.5rem">
+          Contact me through any of the platforms below.
+        </p>
+        <div class="social-links">
+          <a
+            href="https://www.linkedin.com/in/abifadila"
+            class="btn btn-outline"
+            >LinkedIn</a
+          >
+          <a href="mailto:abi.fadila@gmail.com" class="btn btn-outline"
+            >Email Me</a
+          >
+          <a href="https://github.com/bapakfadil" class="btn btn-outline"
+            >GitHub</a
+          >
+        </div>
+      </section>
+    </main>
+
     <footer>
-        <p>
-          **This is just a test Portofolio for freeCodeCamp Certification. <br>
-          ***Inspired by Mimic
-        </p>
-        <p>
-          &copy; Created for
-          <a href="https://www.freecodecamp.com/" target="_blank"
-            >freeCodeCamp <i class="fab fa-free-code-camp"></i
-          ></a>
-        </p>
-      </footer>
-</body>
+      <div class="container">
+        <p>&copy; 2026 bapakfadil. Built with Quality & Code.</p>
+      </div>
+    </footer>
+
+    <script>
+      // --- DARK MODE LOGIC ---
+      const toggleBtn = document.getElementById("theme-toggle");
+      const sunIcon = document.getElementById("sun-icon");
+      const moonIcon = document.getElementById("moon-icon");
+      const html = document.documentElement;
+
+      // Cek preferensi user yang tersimpan
+      if (localStorage.getItem("theme") === "dark") {
+        html.classList.add("dark");
+        sunIcon.style.display = "block";
+        moonIcon.style.display = "none";
+      }
+
+      toggleBtn.addEventListener("click", () => {
+        html.classList.toggle("dark");
+        const isDark = html.classList.contains("dark");
+
+        // Simpan preferensi
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+
+        // Toggle Icons
+        sunIcon.style.display = isDark ? "block" : "none";
+        moonIcon.style.display = isDark ? "none" : "block";
+      });
+
+      // --- CAROUSEL LOGIC ---
+      const track = document.getElementById("track");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      nextBtn.addEventListener("click", () => {
+        track.scrollBy({ left: 320, behavior: "smooth" });
+      });
+
+      prevBtn.addEventListener("click", () => {
+        track.scrollBy({ left: -320, behavior: "smooth" });
+      });
+    </script>
+  </body>
 </html>

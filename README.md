@@ -1,2 +1,3 @@
-# bapakfadil.github.io
-This web were made for Progate Web Development Certification
+# Github Page
+
+my landing page
